@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Home -->
+
+<div class="home">
+    <div class="background_image" style="background-image:url({% static 'images/contact.jpg' %})"></div>
+</div>
+
+<!-- Contact -->
+
+<div class="contact">
+    <div class="container">
+        <div class="row">
+
+            <!-- Contact Form -->
+            <div class="col-lg-4">
+                <div class="contact_form_container">
+                    <form action="todo_add" method="post" id="contact_form" class="contact_form">
+                        {% csrf_token %}
+                        <div style="margin-bottom: 18px"><input type="text" name="todo"
+                                                                class="contact_input contact_input_name inpt"
+                                                                name="name"
+                                                                placeholder="Your ToDo"
+                                                                required="required">
+                            <div class="input_border"></div>
+                        </div>
+                        <div style="margin-bottom: 18px"><input type="number" name="level"
+                                                                class="contact_input contact_input_subject inpt"
+                                                                name="level"
+                                                                placeholder="Task priority" required="required">
+                            <div class="input_border"></div>
+                        </div>
+                        <div style="margin-bottom: 18px"><input type="date" name="created"
+                                                                class="contact_input contact_input_name inpt"
+                                                                name="username"
+                                                                placeholder="Your date"
+                                                                required="required">
+                            <div class="input_border"></div>
+                        </div>
+
+                        <button class="contact_button">Create task</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-2">
+                <div class="contact_form_container">
+                </div>
+            </div>
+
+            <!-- Get in touch -->
+
+            <div class="col-lg-4">
+                <div class="contact_content">
+                    <div class="contact_title">Get in touch with us</div>
+                    <div class="contact_text">
+                        <p>Pellentesque sit amet elementum ccumsan sit amet mattis eget, tristique at leo. Vivamus
+                            massa.Tempor massa et laoreet. Pellentesque sit amet elementum ccumsan sit amet mattis
+                            eget, tristique at leo. Vivamus massa.</p>
+                    </div>
+                    <div class="contact_list ">
+                        {% for task in todo %}
+                        <div class="">
+                            <div class="card" style="width: 33rem; background-color: rgba(255, 215, 0, 0.4)">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{task.name}}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">{{task.level}}</h6>
+                                    <p class="card-text">{{task.created}}</p>
+                                    <a href="{% url 'todo_normal:todo_delete' task.id %}" class="card-link btn btn-sm btn-outline-danger">Done</a>
+                                    <a href="{% url 'todo_normal:todo_update' task.id %}" class="card-link btn btn-sm btn-outline-primary">Update</a>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

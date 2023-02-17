@@ -1,0 +1,34 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" >
+</head>
+<body>
+
+
+<div class="container">
+    <div class="row">
+            <form class="col-md-6 bg-light border" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in form.visible_fields %}
+                <div class="mb-3">
+                    {{ field.label_tag }}
+                    {% render_field field class="form-control" %}
+                    {% if field.help_text %}
+                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                <div class="mb-3">
+                    <input type="submit" class="btn bg-danger form-control" value="Update details">
+                </div>
+            </form>
+    </div>
+</div>
+
+</body>
+</html>

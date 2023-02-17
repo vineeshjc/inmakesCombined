@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- Home -->
+
+    <div class="home">
+        <div class="background_image" style="background-image:url({% static 'images/elements.jpg' %});"></div>
+    </div>
+
+    <!-- Contact -->
+
+    <div class="contact">
+        <div class="container">
+            <div class="row">
+
+                <!-- Contact Form -->
+                <div class="col-lg-6">
+                    <div class="contact_form_container">
+                        <form action="{% url 'movie:add_movie' %}" id="contact_form" class="contact_form" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div style="margin-bottom: 18px"><input type="text" name="name"
+                                                                    class="contact_input contact_input_name inpt"
+                                                                    placeholder="Movie name" required="required">
+                                <div class="input_border"></div>
+                            </div>
+                            <div style="margin-bottom: 18px"><input type="text" name="story"
+                                                                    class="contact_input contact_input_name inpt"
+                                                                    placeholder="Movie story"
+                                                                    required="required">
+                                <div class="input_border"></div>
+                            </div>
+                            <div style="margin-bottom: 18px"><input type="number" name="released"
+                                                                    class="contact_input contact_input_name inpt"
+                                                                    placeholder="Year released"
+                                                                    required="required">
+                                <div class="input_border"></div>
+                            </div>
+                            <div style="margin-bottom: 18px"><input type="file" name="image"
+                                                                    required="required">
+                                <div class="input_border"></div>
+                            </div>
+                            <input class="contact_button" type="submit">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  {% endblock %}

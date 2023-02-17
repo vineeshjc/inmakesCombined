@@ -1,0 +1,122 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-style">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+
+                <li><a class="dropdown-item" href="{% url 'shopping_cart:cart_detail' %}"><i class="fa fa-shopping-cart custom_b"></i></a></li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#"
+                       id="navbarDropdownMain" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        E-shopping
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'e-shopping:eshop_home' %}">All products</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        {% for cat in links %}
+                        <li><a class="dropdown-item" href="{{cat.get_url}}">{{cat.name}}</a></li>
+                        {% endfor %}
+                        <li><a class="dropdown-item" href="{% url 'e-shopping:cat_add' %}">Add Category</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href=""
+                       id="navbarDropdownTours" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Travels
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'traveller:travel_index' %}">tours</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{% url 'traveller:destinations' %}">packages</a></li>
+                        <li><a class="dropdown-item" href="{% url 'traveller:elements' %}">about us</a></li>
+                        <li><a class="dropdown-item" href="{% url 'traveller:news' %}">news</a></li>
+                        <li><a class="dropdown-item" href="{% url 'traveller:contact' %}">contact</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#"
+                       id="navbarDropdownMovies" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Movies List
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'movie:list_movies' %}">movies</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{% url 'movie:add_movie' %}">add movie</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#"
+                       id="navbarDropdownToDo" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        ToDo's
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'todo_normal:todo_list' %}">ToDo Function views</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{% url 'todo_class:todo_list' %}">ToDo Class views</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page"
+                       href="{% url 'registry:register' %}">Register</a>
+                </li>
+
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link active font-style-1" aria-current="page" href="">{{user.username}}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active bg-transparent" aria-current="page"
+                       href="{% url 'registry:logout' %}"><i
+                            class="fa fa-sign-out custom_b"></i><sup>Logout<b></b></sup></a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page"
+                       href="{% url 'registry:login' %}">Login</a>
+                </li>
+                {% endif %}
+
+                <li>
+                    <form class="d-flex" method="get" action="{% url 'e-search:eshop_search' %}">
+                        <input class="form-control me-2"
+                               style="background-color:rgba(255, 255, 251, 0.5); color: white;" type="search"
+                               name="q"
+                               placeholder="Search"
+                               aria-label="Search">
+                        <button class="btn btn-success" type="submit"><i class="fa fa-search"></i>
+                        </button>
+                    </form>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- Home -->
+<div class="home">
+    <div class="background_image" style="background-image:url({% static 'images/contact.jpg' %})"></div>
+</div>
+
+
+<!-- Contact -->
+
+<div class="contact">
+    <div class="container">
+        <div class="row">
+
+            <!-- Get in touch -->
+
+            <div class="col-lg-6">
+                <div class="contact_content">
+                    <div class="contact_list ">
+                        <div class="card" style="width: 33rem; background-color: rgba(255, 215, 0, 0.1);">
+                            <div class="card-body">
+                                <h5 class="card-title">{{task.name}}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{task.level}}</h6>
+                                <p class="card-text">{{task.created}}</p>
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <p class="card-text" style="color: Red;">Do you really want to delete the task below</p>
+                                    <button class="card-link btn btn-sm btn-outline-danger">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

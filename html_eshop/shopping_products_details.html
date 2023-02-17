@@ -1,0 +1,48 @@
+{% extends 'shopping_base.html' %}}
+{% load static %}
+{% block content %}
+
+<!-- Home -->
+
+<div class="home">
+    <div class="background_image" style="background-image:url({% static 'images/elements.jpg' %})"></div>
+</div>
+
+<!-- categories or all products inventory listing -->
+
+<div class="container-fluid">
+    <div class="row  p-1 my_prod_row mx_auto">
+        <div class="col-12 col-md-12 d-flex flex-row align-items-center justify-content-left">
+            <div class="font-style-4"><a href="{% url 'e-shopping:eshop_home' %}">All products</a></div> &nbsp;|&nbsp;&nbsp;
+            <div class="font-style-4"><a href="{{product.category.get_url}}">{{product.category.name}}</a></div> &nbsp;|&nbsp;&nbsp;
+            <div class="font-style-4"><p>{{product.name}}</p></div>
+        </div>
+        <hr>
+    </div>
+    <div class="row p-1 my_prod_row mx_auto">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+            <img class="background-image" src="{{product.image.url}}">
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+            <p class="my_prod_title font-style-1">{{product.name}}</p>
+            <div class="font-style-3"><p>Product details: </p></div>
+            <div class="font-style-2">
+                <p class="my_prod_text">{{product.details}}</p>
+            </div>
+            <div class="font-style-3">
+                <p>Rs. {{product.price}}</p>
+                <p>Stock: {{product.stock}}</p>
+            </div>
+
+            {% if product.stock >= 1 %}
+            <a class="my_prod_title btn btn-success" href="{% url 'shopping_cart:add_cart' product.id %}">add to
+                cart</a>
+            {% else %}
+            <h3>Out of stock</h3>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

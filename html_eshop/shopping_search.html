@@ -1,0 +1,45 @@
+{% extends 'shopping_base.html' %}}
+{% load static %}
+{% block content %}
+<!-- Home -->
+
+<div class="home">
+    <div class="background_image" style="background-image:url({% static 'images/elements.jpg' %})"></div>
+</div>
+
+<div class="container-fluid">
+    <div class="row"><p class="d-flex justify-content-center">You had searched for: <b> {{query}} </b></p></div>
+    <div class="row">
+        {% for item in products %}
+        <div class="col-md-3 p-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <a href="{{item.get_url}}"><img class="my_card_image" src="{{item.image.url}}"
+                                                    alt="product_image"></a>
+                    <p class="card-text">{{item.name|truncatechars:33}}</p>
+                    <p class="card-text">{{item.price}}</p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="row">
+            <div class="col-md-12 text-center"><p>0 results found...</p></div>
+        </div>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-7 text-center">
+                <img class="my_banner" src="{% static 'images/footer_1.jpg' %}">
+                <h1>Modern Fashion </h1>
+                <p class="my_cat_title">Modern clothing today is not just dresses, pants, or jackets with layers needed
+                    to hide from the cold and prying eyes. Instead, clothing is primarily a style and a reflection of
+                    the inner world, in addition to warmth and comfort; clothing is a symbol of your personality;
+                    clothing is an open message to the surrounding humanity.
+                </p>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+

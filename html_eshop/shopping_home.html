@@ -1,0 +1,63 @@
+{% extends 'shopping_base.html' %}}
+{% load static %}
+{% block content %}
+
+<!-- categories banner list -->
+
+{% if categories %}
+<div class="my-image">
+    <img class="background-image" src="{{categories.image.url}}">
+    <div class="overlay">
+        <div>
+            <div class="text-center"><a class="bg-style-1">{{categories.name}}</a></div>
+            <p class="bg-style-1">{{categories.details}}</p>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="my-image">
+    <img class="background-image" src="{% static 'images/fashion.jpg' %}">
+    <div class="overlay">
+        <div>
+            <div class="text-center"><a class="bg-style-2">Modern Fashion</a></div>
+            <p class="bg-style-2">Modern clothing today is not just dresses, pants, or jackets with layers
+                needed to hide from the cold and prying eyes. Instead, clothing is primarily a style and a
+                reflection of the inner world, in addition to warmth and comfort; clothing is a
+                symbol of your personality; clothing is an open message to the surrounding humanity.</p>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- categories or all products inventory listing -->
+
+<div class="container-fluid">
+    <div class="row">
+        {% for item in products.object_list %}
+        <div class="col-md-3 p-3">
+            <div class="card text-center my-card">
+                <div class="card-body">
+                    <a href="{{item.get_url}}"><img class="my_card_image" src="{{item.image.url}}" alt="{{item.name}}"></a>
+                    <h5 class="card-title font-style-1">{{item.name|truncatechars:33}}</h5>
+                    <p class="card-text font-style-1">{{item.price}}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row">
+        {% if products.paginator.num_pages > 1 %}
+        <hr>
+        <div class="d-flex justify-content-center">
+            {% for page in products.paginator.page_range %}
+            <a href="?page={{page}}"
+               class="btn btn-danger btn-sm m-1 {% if products.number == page %} active {% endif %}">{{page}}</a>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}
+

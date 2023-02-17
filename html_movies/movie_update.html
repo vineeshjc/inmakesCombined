@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+<!-- Home -->
+
+<div class="home">
+    <div class="background_image" style="background-image:url({% static 'images/elements.jpg' %});"></div>
+</div>
+
+<div class="contact">
+    <div class="container">
+        <div class="row">
+
+            <!-- Contact Form -->
+            <div class="col-lg-4">
+                <div class="contact_content">
+                    <div class="card" style="width: 23rem;">
+                        <img src="{{movie.image.url}}" class="card-img-top" style="height: 490px;">
+                        <div class="card-body">
+                            <h4 class="card-title"><b>{{movie.name}}</b></h4>
+                            <textarea class="card-text" rows="3" cols="43">{{movie.story}}</textarea>
+                            <h6 class="card-text"><b>Released: {{movie.released}}</b></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Get in touch -->
+
+            <div class="col-lg-8">
+
+                <div class="contact_content">
+                    <form method="post" action="">
+                        <div class="card" style="width: 33rem; background-color: rgba(255, 215, 0, 0.2);">
+                            <div class="card-body">
+                                {% csrf_token %}
+                                {% for field in form.visible_fields %}
+                                <div class="mb-3">
+                                    {{ field.label_tag }}
+                                    {% render_field field class="form-control" %}
+                                    {% if field.help_text %}
+                                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                                    {% endif %}
+                                </div>
+                                {% endfor %}
+                                <div class="mb-3">
+                                    <input type="submit" class="btn btn-outline-primary" value="Update details">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

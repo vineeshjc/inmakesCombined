@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+<!-- Home -->
+<div class="home">
+    <div class="background_image" style="background-image:url({% static 'images/contact.jpg' %})"></div>
+</div>
+
+<div class="contact">
+    <div class="container">
+        <div class="row">
+
+            <!-- Contact Form -->
+            <div class="col-lg-6">
+                <div class="contact_content">
+                    <div class="contact_list ">
+                        <div class="">
+                            <div class="card" style="width: 33rem; background-color: rgba(255, 215, 0, 0.4);">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{task.name}}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">{{task.level}}</h6>
+                                    <p class="card-text">{{task.created}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Get in touch -->
+
+            <div class="col-lg-6">
+
+                <div class="contact_content">
+                    <form method="post" action="">
+                        <div class="card" style="width: 33rem; background-color: rgba(255, 215, 0, 0.2);">
+                            <div class="card-body">
+                                <h5 class="card-title">ToDo</h5>
+                                {% csrf_token %}
+                                {% for field in form.visible_fields %}
+                                <div class="mb-3">
+                                    {{ field.label_tag }}
+                                    {% render_field field class="form-control" style="background-color: rgba(255, 215, 0, 0.2);" %}
+                                    {% if field.help_text %}
+                                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                                    {% endif %}
+                                </div>
+                                {% endfor %}
+                                <div class="mb-3">
+                                    <input type="submit" class="btn btn-outline-primary" value="Update details">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
